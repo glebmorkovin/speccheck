@@ -3,7 +3,7 @@ import { Bebas_Neue, Inter } from "next/font/google";
 import "./globals.css";
 
 const bebas = Bebas_Neue({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   weight: "400",
   variable: "--font-bebas",
   display: "swap",
