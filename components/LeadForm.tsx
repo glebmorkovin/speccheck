@@ -21,7 +21,9 @@ export default function LeadForm() {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    const { name, value, type, checked } = e.target;
+    const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+    const { name, value, type } = target;
+    const checked = "checked" in target ? target.checked : false;
     setForm((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
