@@ -47,7 +47,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-1 items-center justify-start gap-2 overflow-x-auto whitespace-nowrap pb-1 pr-3 flex-nowrap md:justify-end lg:gap-3 lg:pr-6">
+        <div className="flex min-w-0 flex-1 items-center justify-start gap-2 overflow-x-auto whitespace-nowrap pb-1 pr-3 flex-nowrap md:justify-end lg:gap-2 lg:overflow-visible lg:pr-6">
           {navItems.map((item) => (
             <motion.div
               key={item.href}
@@ -58,7 +58,7 @@ export default function Header() {
             >
               <Link
                 href={item.href}
-                className="pill whitespace-nowrap border-[2px] border-black bg-white px-4 py-2 text-sm hover:-translate-y-0.5 hover:shadow-pill"
+                className="pill whitespace-nowrap border-[2px] border-black bg-white px-3 py-2 text-sm hover:-translate-y-0.5 hover:shadow-pill"
                 aria-label={`Перейти к секции ${item.label}`}
               >
                 {item.label}
