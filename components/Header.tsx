@@ -47,10 +47,11 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-1 items-center justify-start gap-2 overflow-x-auto whitespace-nowrap pb-1 pr-1 md:gap-3 md:pr-4">
+        <div className="flex min-w-0 flex-1 items-center justify-start gap-2 overflow-x-auto whitespace-nowrap pb-1 pr-3 flex-nowrap md:justify-end lg:gap-3 lg:pr-6">
           {navItems.map((item) => (
             <motion.div
               key={item.href}
+              className="shrink-0"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35 }}
@@ -65,6 +66,7 @@ export default function Header() {
             </motion.div>
           ))}
           <motion.div
+            className="shrink-0"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.05 }}
