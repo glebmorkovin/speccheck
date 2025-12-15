@@ -37,14 +37,9 @@ export default function Header() {
           <div className="h-12 w-12 rounded-full border-[3px] border-black bg-yellow flex items-center justify-center shadow-pill text-lg font-display tracking-tight">
             SC
           </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-sm font-semibold uppercase tracking-[0.12em]">
-              SpecCheck
-            </span>
-            <span className="text-xs text-black/70">
-              ИИ-бот для контроля измерений
-            </span>
-          </div>
+          <span className="text-base font-semibold uppercase tracking-[0.12em]">
+            SpecCheck
+          </span>
         </div>
 
         <div className="flex min-w-0 flex-1 items-center justify-start gap-2 overflow-x-auto whitespace-nowrap pb-1 pr-3 flex-nowrap md:justify-end lg:gap-2 lg:overflow-visible lg:pr-6">
