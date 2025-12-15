@@ -65,10 +65,10 @@ export default function Hero() {
           {...fadeUp}
           transition={{ ...fadeUp.transition, delay: 0.1 }}
         >
-          <div className="relative rounded-[32px] border-[3px] border-black bg-gradient-to-br from-sky via-white to-lavender p-6 shadow-card">
+          <div className="relative rounded-[32px] border-[3px] border-black bg-gradient-to-br from-sky via-white to-lavender p-6 shadow-card overflow-hidden">
             <div className="absolute inset-2 rounded-[26px] border-[2px] border-black/30 pointer-events-none" />
             <div className="relative flex min-h-[360px] flex-col justify-between gap-6">
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <div className="pill border-[3px] border-black bg-orange px-4 py-2 text-sm text-white shadow-pill">
                   Постер SpecCheck
                 </div>
@@ -87,18 +87,18 @@ export default function Hero() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
-                {["⚙️", "📐", "🤖", "🚀"].map((icon) => (
-                  <span
-                    key={icon}
-                    className="pill border-[3px] border-black bg-white px-3 py-2 text-xl shadow-pill"
-                    aria-hidden
+                {pictos.map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-2 rounded-full border-[3px] border-black bg-white px-3 py-2 text-sm shadow-pill"
                   >
-                    {icon}
-                  </span>
+                    <span aria-hidden className="flex h-8 w-8 items-center justify-center rounded-full border-[2px] border-black bg-sky/60">
+                      {item.icon}
+                    </span>
+                    <span className="font-semibold">{item.label}</span>
+                  </div>
                 ))}
               </div>
-              <div className="absolute -left-6 -bottom-6 h-16 w-16 rotate-6 rounded-full border-[3px] border-black bg-yellow shadow-pill" />
-              <div className="absolute -right-4 -top-6 h-14 w-14 -rotate-6 rounded-3xl border-[3px] border-black bg-mint shadow-card" />
             </div>
           </div>
         </motion.div>
@@ -106,3 +106,41 @@ export default function Hero() {
     </section>
   );
 }
+
+const pictos = [
+  {
+    label: "Автоматизация",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5 text-black" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+      </svg>
+    ),
+  },
+  {
+    label: "Точность",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5 text-black" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 20L12 4l8 16H4z" />
+        <path d="M10 16h4" />
+      </svg>
+    ),
+  },
+  {
+    label: "ИИ",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5 text-black" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="5" y="5" width="14" height="14" rx="3" />
+        <path d="M9 9h6M9 12h6M9 15h4" />
+      </svg>
+    ),
+  },
+  {
+    label: "Скорость",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5 text-black" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 13l12-8-4 8 8 0-12 8 4-8H4z" />
+      </svg>
+    ),
+  },
+];
