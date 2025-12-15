@@ -1,0 +1,63 @@
+<svg width="2000" height="900" viewBox="0 0 2000 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="2000" height="900" rx="16" fill="#FFFFFF"/>
+<rect x="8" y="8" width="1984" height="884" rx="14" stroke="#111111" stroke-width="6"/>
+<text x="24" y="60" fill="#111111" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="600">Управляющий ОТК/ПЗ</text>
+<text x="24" y="280" fill="#111111" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="600">Инженер</text>
+<text x="24" y="500" fill="#111111" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="600">TG бот</text>
+<text x="24" y="720" fill="#111111" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="600">Приемщик</text>
+<line x1="0" y1="220" x2="2000" y2="220" stroke="#B3B3B3" stroke-width="2" stroke-dasharray="8 8"/>
+<line x1="0" y1="440" x2="2000" y2="440" stroke="#B3B3B3" stroke-width="2" stroke-dasharray="8 8"/>
+<line x1="0" y1="660" x2="2000" y2="660" stroke="#B3B3B3" stroke-width="2" stroke-dasharray="8 8"/>
+
+<!-- Open AI not used in to-be for brevity -->
+
+<!-- Swimlane content -->
+<rect x="240" y="120" width="190" height="110" rx="14" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="255" y="165" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">Запускает процесс</text>
+<text x="255" y="188" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">приемки изделий</text>
+
+<rect x="520" y="340" width="180" height="110" rx="14" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="535" y="385" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">Загружает</text>
+<text x="535" y="408" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">в TG бота</text>
+
+<rect x="800" y="340" width="200" height="110" rx="14" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="815" y="385" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">TG бот принимает</text>
+<text x="815" y="408" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">чертеж</text>
+
+<rect x="1080" y="340" width="200" height="110" rx="14" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="1095" y="385" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">TG бот заполняет</text>
+<text x="1095" y="408" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">накладную</text>
+
+<rect x="1360" y="340" width="200" height="110" rx="14" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="1375" y="385" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">Получает готовые</text>
+<text x="1375" y="408" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">файлы</text>
+
+<rect x="1640" y="340" width="140" height="110" rx="14" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="1660" y="388" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">Процесс</text>
+<text x="1660" y="411" fill="#111" font-size="18" font-family="Inter, Arial, sans-serif">завершен</text>
+
+<!-- Templates and DB -->
+<rect x="620" y="520" width="90" height="90" rx="10" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="635" y="575" fill="#111" font-size="16" font-family="Inter, Arial, sans-serif">Шаблон</text>
+
+<rect x="760" y="520" width="110" height="90" rx="10" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="780" y="575" fill="#111" font-size="16" font-family="Inter, Arial, sans-serif">База</text>
+
+<line x1="665" y1="520" x2="665" y2="450" stroke="#111" stroke-width="2" stroke-dasharray="5 5"/>
+<line x1="815" y1="520" x2="815" y2="450" stroke="#111" stroke-width="2" stroke-dasharray="5 5"/>
+
+<!-- Arrows -->
+<text x="120" y="185" fill="#111" font-size="16" font-family="Inter, Arial, sans-serif">Чертеж получен</text>
+<line x1="200" y1="180" x2="240" y2="180" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="430" y1="395" x2="520" y2="395" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="700" y1="395" x2="800" y2="395" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1000" y1="395" x2="1080" y2="395" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1280" y1="395" x2="1360" y2="395" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1560" y1="395" x2="1640" y2="395" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L6,3 z" fill="#111111"/>
+  </marker>
+</defs>
+</svg>

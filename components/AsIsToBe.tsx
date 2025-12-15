@@ -8,7 +8,8 @@ type Card = {
   title: string;
   text: string;
   color: string;
-  image: string;
+  thumb: string;
+  full: string;
   placeholder: string;
 };
 
@@ -17,14 +18,16 @@ const cards: Card[] = [
     title: "AS-IS",
     text: "Ручное заполнение накладной по чертежу, повторные сверки, человеческий фактор.",
     color: "bg-sky",
-    image: "/as-is.svg",
+    thumb: "/as-is.svg",
+    full: "/as-is-full.svg",
     placeholder: "AS-IS diagram",
   },
   {
     title: "TO-BE",
     text: "Загрузка в Telegram-бот → автоматизация извлечения параметров и подбора инструментов → быстрее и стабильнее.",
     color: "bg-mint",
-    image: "/to-be.svg",
+    thumb: "/to-be.svg",
+    full: "/to-be-full.svg",
     placeholder: "TO-BE diagram",
   },
 ];
@@ -157,9 +160,9 @@ export default function AsIsToBe() {
               }}
             >
               <img
-                src={activeDiagram.image}
+                src={activeDiagram.full}
                 alt={activeDiagram.placeholder}
-                className="max-h-[80vh] rounded-[24px] border-[3px] border-white shadow-2xl"
+                className="max-h-[82vh] max-w-[92vw] rounded-[24px] border-[3px] border-white shadow-2xl object-contain"
               />
             </div>
           </div>
@@ -178,7 +181,7 @@ function AsToBeCard({
   idx: number;
   onOpen: () => void;
 }) {
-  const available = useImageAvailability(card.image);
+  const available = useImageAvailability(card.thumb);
   return (
     <motion.div
       className={`card ${card.color} p-6 flex flex-col gap-4`}
@@ -198,20 +201,25 @@ function AsToBeCard({
       <p className="text-base text-black/80">{card.text}</p>
       <div className="relative mt-auto flex-1 rounded-[22px] border-[3px] border-black bg-white/70 p-3 hover:-translate-y-1 transition-transform duration-300">
         {available ? (
-          <button
-            type="button"
-            className="relative block h-full w-full"
-            onClick={onOpen}
-            aria-label={`Открыть диаграмму ${card.title} в полный экран`}
-          >
-            <Image
-              src={card.image}
-              alt={card.placeholder}
-              fill
-              className="object-contain rounded-[18px]"
-              sizes="(min-width: 1024px) 400px, 100vw"
-            />
-          </button>
+          <div className="flex items-center justify-between gap-3">
+            <div className="relative h-28 w-48 overflow-hidden rounded-[16px] border-[2px] border-black bg-white">
+              <Image
+                src={card.thumb}
+                alt={card.placeholder}
+                fill
+                className="object-contain"
+                sizes="200px"
+                priority
+              />
+            </div>
+            <button
+              type="button"
+              className="pill border-[3px] border-black bg-black px-4 py-2 text-sm font-semibold text-white hover:-translate-y-1 hover:shadow-pill"
+              onClick={onOpen}
+            >
+              Посмотреть диаграмму {card.title}
+            </button>
+          </div>
         ) : (
           <div className="flex h-full min-h-[220px] items-center justify-center rounded-[18px] bg-black/5 text-sm font-semibold uppercase text-black/60">
             {card.placeholder}
