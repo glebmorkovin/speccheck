@@ -32,8 +32,8 @@ export default function Header() {
       }`}
       aria-label="Главная навигация"
     >
-      <div className="container mx-auto flex flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:gap-6">
-        <div className="flex items-center gap-3 shrink-0">
+      <div className="container mx-auto flex flex-col gap-3 px-3 py-3 md:flex-row md:items-center md:gap-4 lg:px-6">
+        <div className="flex shrink-0 items-center gap-3">
           <div className="h-12 w-12 rounded-full border-[3px] border-black bg-yellow flex items-center justify-center shadow-pill text-lg font-display tracking-tight">
             SC
           </div>
@@ -47,7 +47,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex flex-1 items-center justify-end gap-2 overflow-x-auto whitespace-nowrap pb-1 md:gap-3 md:overflow-visible">
+        <div className="flex min-w-0 flex-1 items-center justify-start gap-2 overflow-x-auto whitespace-nowrap pb-1 pr-1 md:gap-3 md:pr-4">
           {navItems.map((item) => (
             <motion.div
               key={item.href}
