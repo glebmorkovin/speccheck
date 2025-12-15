@@ -47,7 +47,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex w-full items-center gap-2 overflow-x-auto pb-1 sm:w-auto sm:justify-end">
+        <div className="flex w-full flex-wrap items-center gap-2 overflow-x-auto pb-1 sm:w-auto sm:flex-wrap sm:gap-3 sm:overflow-visible sm:justify-end">
           {navItems.map((item) => (
             <motion.div
               key={item.href}
