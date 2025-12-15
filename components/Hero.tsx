@@ -13,13 +13,13 @@ const fadeUp = {
 export default function Hero() {
   return (
     <section className="relative section" aria-labelledby="hero-title">
-      <div className="container mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-12">
+      <div className="container mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-12">
         <motion.div
           className="lg:col-span-7 space-y-6"
           {...fadeUp}
         >
-          <div className="inline-flex items-center gap-3 rounded-full border-[3px] border-black bg-yellow px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] shadow-pill">
-            SpecCheck · ИИ-бот для контроля измерений
+          <div className="inline-flex w-full max-w-4xl items-center justify-center gap-3 rounded-full border-[3px] border-black bg-yellow px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] shadow-pill md:text-base lg:text-lg">
+            SPECCHECK · ИИ-БОТ ДЛЯ КОНТРОЛЯ ИЗМЕРЕНИЙ
           </div>
           <h1
             id="hero-title"
