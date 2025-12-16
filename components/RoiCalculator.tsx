@@ -63,16 +63,16 @@ export default function RoiCalculator() {
   const [drawings, setDrawings] = useState("10");
   const [employees, setEmployees] = useState("10");
   const [rate, setRate] = useState("2500");
-  const [time, setTime] = useState("7");
+  const [time, setTime] = useState("10");
   const [infoKey, setInfoKey] = useState<InfoKey | null>(null);
 
   const result = useMemo(
     () =>
       calculateRoi({
         drawingsPerEmployee: toNumber(drawings, 10),
-        employees: toNumber(employees, 1),
+        employees: toNumber(employees, 10),
         rate: toNumber(rate, 0),
-        time: toNumber(time, 1),
+        time: toNumber(time, 10),
       }),
     [drawings, employees, rate, time],
   );
@@ -118,7 +118,7 @@ export default function RoiCalculator() {
                 ariaLabel="Количество сотрудников"
                 value={employees}
                 setValue={setEmployees}
-                fallback={1}
+                fallback={10}
               />
               <NumberInput
                 label="Ставка в час (R)"
@@ -133,7 +133,7 @@ export default function RoiCalculator() {
                 ariaLabel="Время на один чертеж"
                 value={time}
                 setValue={setTime}
-                fallback={7}
+                fallback={10}
               />
             </div>
             <div className="mt-4 flex flex-wrap gap-2 text-xs text-black/70">
