@@ -276,7 +276,7 @@ function toNumber(raw: string, fallback: number) {
   const cleaned = raw.replace(/[^\d.,]/g, "").replace(",", ".");
   const num = parseFloat(cleaned);
   if (!Number.isFinite(num) || num <= 0) return fallback;
-  return Math.min(1000, num);
+  return Math.min(10_000_000, num);
 }
 
 function InfoButton({ onClick }: { onClick: () => void }) {
