@@ -1,7 +1,6 @@
 export const ROI_CONSTANTS = {
   license: 250000,
   subscription: 30000,
-  drawingsPerEmployee: 100,
   timeReduction: 0.7,
   subscriptionLimit: 500,
 };
@@ -10,6 +9,7 @@ export type RoiInput = {
   employees: number;
   rate: number;
   time: number;
+  drawingsPerEmployee: number;
 };
 
 export type RoiResult = {
@@ -29,8 +29,9 @@ export function calculateRoi({
   employees,
   rate,
   time,
+  drawingsPerEmployee,
 }: RoiInput): RoiResult {
-  const rawDrawings = employees * ROI_CONSTANTS.drawingsPerEmployee;
+  const rawDrawings = employees * drawingsPerEmployee;
   const cappedDrawings = Math.min(
     rawDrawings,
     ROI_CONSTANTS.subscriptionLimit,
