@@ -5,6 +5,53 @@ import { motion } from "framer-motion";
 import { calculateRoi, ROI_CONSTANTS } from "@/utils/roi";
 import { formatCurrency } from "@/utils/currency";
 
+type InfoKey =
+  | "inputs"
+  | "rawDrawings"
+  | "cappedDrawings"
+  | "laborSavings"
+  | "netSavings"
+  | "payback"
+  | "yearly";
+
+const INFO: Record<InfoKey, { title: string; text: string }> = {
+  inputs: {
+    title: "Как считаем ROI",
+    text: `Расчётный объём = (чертежей на сотрудника) × (сотрудники).
+Учтённый объём = min(расчётный, лимит 500).
+Время до внедрения = Учтённый объём × (T/60).
+Стоимость труда до = Время до × ставка (R).
+Экономия на труде = Стоимость труда до × 70%.
+Чистая экономия = Экономия на труде – подписка.
+Окупаемость (мес) = Лицензия / Чистая экономия, если она > 0.
+Чистый эффект 12 мес = Чистая экономия × 12 – Лицензия.`,
+  },
+  rawDrawings: {
+    title: "Расчётный объём чертежей/мес",
+    text: "Количество сотрудников × среднее число чертежей на сотрудника в месяц. Это оценка вашего исходного потока.",
+  },
+  cappedDrawings: {
+    title: "Учтённый объём (лимит подписки)",
+    text: "Минимум из расчётного объёма и лимита 500 чертежей/мес в подписке. Всё сверх лимита не учитывается в калькуляторе.",
+  },
+  laborSavings: {
+    title: "Экономия на труде/мес",
+    text: "Экономия времени = Учтённый объём × (T/60). Экономия денег = Экономия времени × ставка × 70% (сокращение за счёт автоматизации).",
+  },
+  netSavings: {
+    title: "Чистая экономия/мес (минус подписка)",
+    text: "Экономия на труде минус стоимость подписки. Показывает, сколько остаётся после оплаты сервиса.",
+  },
+  payback: {
+    title: "Окупаемость лицензии (мес)",
+    text: "Лицензия / Чистая экономия, если она положительная. Если экономия ≤ 0, окупаемость не достигается при текущих вводных.",
+  },
+  yearly: {
+    title: "Чистый эффект за 12 месяцев",
+    text: "Чистая экономия × 12 – стоимость лицензии. Это накопленный результат за первый год с учётом подписки и лицензии.",
+  },
+};
+
 const fade = {
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
@@ -17,6 +64,7 @@ export default function RoiCalculator() {
   const [employees, setEmployees] = useState("10");
   const [rate, setRate] = useState("2500");
   const [time, setTime] = useState("7");
+  const [infoKey, setInfoKey] = useState<InfoKey | null>(null);
 
   const result = useMemo(
     () =>
@@ -51,9 +99,12 @@ export default function RoiCalculator() {
           {...fade}
         >
           <div className="card bg-white p-6 lg:col-span-5">
-            <h3 className="font-display text-2xl uppercase leading-tight">
-              Вводные
-            </h3>
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="font-display text-2xl uppercase leading-tight">
+                Вводные
+              </h3>
+              <InfoButton onClick={() => setInfoKey("inputs")} />
+            </div>
             <div className="mt-4 grid grid-cols-1 gap-4">
               <NumberInput
                 label="Сколько чертежей в среднем обрабатывает один сотрудник в месяц"
@@ -108,21 +159,25 @@ export default function RoiCalculator() {
               title="Расчётный объём чертежей/мес"
               value={result.rawDrawings.toLocaleString("ru-RU")}
               color="bg-lavender"
+              onInfo={() => setInfoKey("rawDrawings")}
             />
             <ResultCard
               title="Учтённый объём (лимит подписки)"
               value={result.cappedDrawings.toLocaleString("ru-RU")}
               color="bg-sky"
+              onInfo={() => setInfoKey("cappedDrawings")}
             />
             <ResultCard
               title="Экономия на труде/мес"
               value={formatCurrency(result.laborSavingsMonth)}
               color="bg-mint"
+              onInfo={() => setInfoKey("laborSavings")}
             />
             <ResultCard
               title="Чистая экономия/мес (минус подписка)"
               value={formatCurrency(result.netSavingsMonth)}
               color="bg-yellow"
+              onInfo={() => setInfoKey("netSavings")}
             />
             <ResultCard
               title="Окупаемость лицензии (мес)"
@@ -132,14 +187,24 @@ export default function RoiCalculator() {
                   : "Не окупается при текущих вводных"
               }
               color="bg-orange"
+              onInfo={() => setInfoKey("payback")}
             />
             <ResultCard
               title="Чистый эффект за 12 месяцев"
               value={formatCurrency(result.yearlyEffect)}
               color="bg-blue"
+              onInfo={() => setInfoKey("yearly")}
             />
           </div>
         </motion.div>
+
+        {infoKey && (
+          <InfoModal
+            title={INFO[infoKey].title}
+            text={INFO[infoKey].text}
+            onClose={() => setInfoKey(null)}
+          />
+        )}
       </div>
     </section>
   );
@@ -149,16 +214,21 @@ function ResultCard({
   title,
   value,
   color,
+  onInfo,
 }: {
   title: string;
   value: string;
   color: string;
+  onInfo: () => void;
 }) {
   return (
     <div className={`card ${color} p-5`}>
-      <p className="text-sm font-semibold uppercase tracking-[0.08em]">
-        {title}
-      </p>
+      <div className="flex items-start justify-between gap-2">
+        <p className="text-sm font-semibold uppercase tracking-[0.08em]">
+          {title}
+        </p>
+        <InfoButton onClick={onInfo} />
+      </div>
       <p className="mt-3 font-display text-3xl uppercase leading-tight">
         {value}
       </p>
@@ -207,4 +277,52 @@ function toNumber(raw: string, fallback: number) {
   const num = parseFloat(cleaned);
   if (!Number.isFinite(num) || num <= 0) return fallback;
   return Math.min(1000, num);
+}
+
+function InfoButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="pill border-[2px] border-black bg-white px-3 py-1 text-xs font-semibold hover:-translate-y-0.5 hover:shadow-pill"
+      aria-label="Подробнее"
+    >
+      Подробнее
+    </button>
+  );
+}
+
+function InfoModal({
+  title,
+  text,
+  onClose,
+}: {
+  title: string;
+  text: string;
+  onClose: () => void;
+}) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
+      <div className="w-full max-w-2xl rounded-[20px] border-[3px] border-black bg-white p-6 shadow-2xl">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="font-display text-2xl uppercase leading-tight">
+              {title}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="pill border-[2px] border-black bg-black px-3 py-1 text-xs font-semibold text-white hover:-translate-y-0.5 hover:shadow-pill"
+            aria-label="Закрыть"
+          >
+            ✕
+          </button>
+        </div>
+        <p className="mt-4 whitespace-pre-line text-base text-black/80">
+          {text}
+        </p>
+      </div>
+    </div>
+  );
 }
