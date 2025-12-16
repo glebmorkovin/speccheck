@@ -199,30 +199,18 @@ function AsToBeCard({
         </span>
       </div>
       <p className="text-base text-black/80">{card.text}</p>
-      <div className="relative mt-auto flex-1 rounded-[22px] border-[3px] border-black bg-white/70 p-3 hover:-translate-y-1 transition-transform duration-300">
-        {available ? (
-          <div className="flex items-center justify-between gap-3">
-            <div className="relative h-28 w-48 overflow-hidden rounded-[16px] border-[2px] border-black bg-white">
-              <Image
-                src={card.thumb}
-                alt={card.placeholder}
-                fill
-                className="object-contain"
-                sizes="200px"
-                priority
-              />
-            </div>
-            <button
-              type="button"
-              className="pill border-[3px] border-black bg-black px-4 py-2 text-sm font-semibold text-white hover:-translate-y-1 hover:shadow-pill"
-              onClick={onOpen}
-            >
-              Посмотреть диаграмму {card.title}
-            </button>
-          </div>
-        ) : (
-          <div className="flex h-full min-h-[220px] items-center justify-center rounded-[18px] bg-black/5 text-sm font-semibold uppercase text-black/60">
-            {card.placeholder}
+      <div className="relative mt-auto flex flex-col gap-4 rounded-[22px] border-[3px] border-black bg-white/70 p-4 hover:-translate-y-1 transition-transform duration-300">
+        <button
+          type="button"
+          className="pill border-[3px] border-black bg-black px-4 py-2 text-sm font-semibold text-white hover:-translate-y-1 hover:shadow-pill w-full text-center"
+          onClick={onOpen}
+          disabled={!available}
+        >
+          Посмотреть диаграмму {card.title}
+        </button>
+        {!available && (
+          <div className="text-center text-xs font-semibold uppercase text-black/50">
+            Диаграмма недоступна
           </div>
         )}
       </div>
