@@ -1,6 +1,6 @@
 export const ROI_CONSTANTS = {
-  license: 250000,
-  subscription: 30000,
+  license: 100000,
+  subscription: 15000,
   timeReduction: 0.7,
   subscriptionLimit: 500,
 };
